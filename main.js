@@ -12,6 +12,8 @@
 let computerNum = 0;
 const $playButton = document.querySelector("#play-button");
 const $userInput = document.querySelector("#user-Input");
+const $resultArea = document.querySelector("#result-area");
+
 $playButton.addEventListener("click", play);
 
 function pickRandomNum() {
@@ -22,11 +24,11 @@ function pickRandomNum() {
 function play() {
   const userValue = $userInput.value;
   if (userValue < computerNum) {
-    console.log("UP!!");
+    $resultArea.textContent = "UP!!!!";
   } else if (userValue > computerNum) {
-    console.log("DOWN!!");
+    $resultArea.textContent = "DOWN!!!!";
   } else {
-    console.log("정답입니다!!!");
+    $resultArea.textContent = "CORRECT!!!!";
   }
 }
 
