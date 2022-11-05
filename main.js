@@ -20,8 +20,14 @@ function pickRandomNum() {
 }
 
 function play() {
-  const inputValue = $userInput.value;
-  console.log(inputValue);
+  const userValue = $userInput.value;
+  if (userValue < computerNum) {
+    console.log("UP!!");
+  } else if (userValue > computerNum) {
+    console.log("DOWN!!");
+  } else {
+    console.log("정답입니다!!!");
+  }
 }
 
 pickRandomNum();
