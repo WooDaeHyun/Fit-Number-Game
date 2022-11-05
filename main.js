@@ -27,8 +27,22 @@ function pickRandomNum() {
   console.log("정답", computerNum);
 }
 
+let tempUserValue = [];
 function play() {
   const userValue = $userInput.value;
+
+  if (userValue > 100 || userValue < 1) {
+    $resultArea.textContent = "Please! put number 1~100!";
+    return;
+  }
+
+  if (tempUserValue.includes(userValue)) {
+    $resultArea.textContent =
+      "This number was already put! please put another number";
+    return;
+  }
+  tempUserValue.push(userValue);
+
   chances--;
   $chances.innerHTML = `Remaining chance : ${chances}`;
   if (userValue < computerNum) {
@@ -54,11 +68,12 @@ function reset() {
   $userInput.value = "";
   //새로운 번호가 생성되고
   pickRandomNum();
-  $resultArea.textContent = "결과가 나온다";
+  $resultArea.textContent = "Show result here";
   gameOver = false;
   chances = 5;
   $chances.innerHTML = `Remaining chance : ${chances}`;
   $playButton.disabled = false;
+  tempUserValue = [];
 }
 
 pickRandomNum();
