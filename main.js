@@ -49,8 +49,10 @@ function play() {
     $resultArea.textContent = "UP!!!!";
   } else if (userValue > computerNum) {
     $resultArea.textContent = "DOWN!!!!";
-  } else {
-    $resultArea.textContent = "CORRECT!!!!";
+  } else if (userValue == computerNum) {
+    $resultArea.textContent = "CORRECT!!!! YOU WIN";
+    $playButton.disabled = true;
+    return;
   }
 
   if (!chances) {
