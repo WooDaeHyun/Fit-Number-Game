@@ -13,8 +13,10 @@ let computerNum = 0;
 const $playButton = document.querySelector("#play-button");
 const $userInput = document.querySelector("#user-Input");
 const $resultArea = document.querySelector("#result-area");
+const $resetButton = document.querySelector("#reset-button");
 
 $playButton.addEventListener("click", play);
+$resetButton.addEventListener("click", reset);
 
 function pickRandomNum() {
   computerNum = parseInt(Math.random() * 100) + 1;
@@ -30,6 +32,14 @@ function play() {
   } else {
     $resultArea.textContent = "CORRECT!!!!";
   }
+}
+
+function reset() {
+  // user input창이 깨끗하게 정리되고
+  $userInput.value = "";
+  //새로운 번호가 생성되고
+  pickRandomNum();
+  $resultArea.textContent = "결과가 나온다";
 }
 
 pickRandomNum();
