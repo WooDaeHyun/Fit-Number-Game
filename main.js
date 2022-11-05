@@ -1,13 +1,18 @@
 let computerNum = 0;
+let chances = 5;
+let gameOver = false;
+let tempUserValue = [];
+
 const $playButton = document.querySelector("#play-button");
 const $userInput = document.querySelector("#user-Input");
 const $resultArea = document.querySelector("#result-area");
 const $resetButton = document.querySelector("#reset-button");
 const $chances = document.querySelector("#chances");
-let chances = 5;
-let gameOver = false;
+const $check = document.querySelector("#check");
 
 $chances.innerHTML = `Remaining chance : ${chances}`;
+$check.innerHTML = `Numbers you put : ${tempUserValue}`;
+
 $playButton.addEventListener("click", play);
 $resetButton.addEventListener("click", reset);
 $userInput.addEventListener("focus", () => {
@@ -16,10 +21,9 @@ $userInput.addEventListener("focus", () => {
 
 function pickRandomNum() {
   computerNum = parseInt(Math.random() * 100) + 1;
-  console.log("정답", computerNum);
+  console.log("correct : ", computerNum);
 }
 
-let tempUserValue = [];
 function play() {
   let userValue = $userInput.value;
 
@@ -34,6 +38,7 @@ function play() {
     return;
   }
   tempUserValue.push(userValue);
+  $check.innerHTML = `Numbers you put : ${tempUserValue}`;
 
   chances--;
   $chances.innerHTML = `Remaining chance : ${chances}`;
@@ -62,12 +67,13 @@ function reset() {
   $userInput.value = "";
   //새로운 번호가 생성되고
   pickRandomNum();
-  $resultArea.textContent = "Show result here";
+  $resultArea.textContent = "Showing result";
   gameOver = false;
   chances = 5;
   $chances.innerHTML = `Remaining chance : ${chances}`;
   $playButton.disabled = false;
   tempUserValue = [];
+  $check.innerHTML = `Numbers you put : ${tempUserValue}`;
 }
 
 pickRandomNum();
