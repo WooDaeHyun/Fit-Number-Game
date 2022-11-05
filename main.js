@@ -14,7 +14,11 @@ const $playButton = document.querySelector("#play-button");
 const $userInput = document.querySelector("#user-Input");
 const $resultArea = document.querySelector("#result-area");
 const $resetButton = document.querySelector("#reset-button");
+const $chances = document.querySelector("#chances");
+let chances = 5;
+let gameOver = false;
 
+$chances.innerHTML = `Remaining chance : ${chances}`;
 $playButton.addEventListener("click", play);
 $resetButton.addEventListener("click", reset);
 
@@ -25,12 +29,23 @@ function pickRandomNum() {
 
 function play() {
   const userValue = $userInput.value;
+  chances--;
+  $chances.innerHTML = `Remaining chance : ${chances}`;
   if (userValue < computerNum) {
     $resultArea.textContent = "UP!!!!";
   } else if (userValue > computerNum) {
     $resultArea.textContent = "DOWN!!!!";
   } else {
     $resultArea.textContent = "CORRECT!!!!";
+  }
+
+  if (!chances) {
+    gameOver = true;
+  }
+
+  if (gameOver) {
+    $playButton.disabled = true;
+    $resultArea.textContent = "Game Over";
   }
 }
 
@@ -40,6 +55,10 @@ function reset() {
   //새로운 번호가 생성되고
   pickRandomNum();
   $resultArea.textContent = "결과가 나온다";
+  gameOver = false;
+  chances = 5;
+  $chances.innerHTML = `Remaining chance : ${chances}`;
+  $playButton.disabled = false;
 }
 
 pickRandomNum();
